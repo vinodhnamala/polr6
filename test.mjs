@@ -9,8 +9,11 @@ import puppeteer from 'puppeteer';
       defaultViewport: false
     });
     const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
-    const lpmInitValue=848;
-    const lpmEndValue=1040;
+    const lpmInitValue = 252;
+    const lpmEndValue = 432;
+    const saveWaitTime = 7000;
+    const lpmChangeWaitTime = 7000;
+    const rowChangeWaitTime = 7000;
 
     const page = await browser.newPage();
     // Navigate the page to a URL
@@ -32,11 +35,13 @@ import puppeteer from 'puppeteer';
     await page.waitForNavigation({ waitUntil: 'networkidle0', timeout: 0 });
 
     for (let lpmVal = lpmInitValue; lpmVal < lpmEndValue; lpmVal = lpmVal + 2) {
+      var datetime = new Date();
+      console.log(datetime);
       console.log("lpm:", lpmVal);
       await page.waitForSelector("#ddlLPMno");
       let lpm = await page.$('[name="ddlLPMno"]')
       await lpm.select(lpmVal.toString());
-      await delay(10000);
+      await delay(lpmChangeWaitTime);
 
       await page.waitForSelector("#ddlRowRange");
 
@@ -54,7 +59,7 @@ import puppeteer from 'puppeteer';
         if (mn > 0) {
           let rowrng1 = await page.$('[name="ddlRowRange"]')
           await rowrng1.select(rowrangeopt[mn]);
-          await delay(10000);
+          await delay(rowChangeWaitTime);
         }
         let result = await page.evaluate(() => {
           let allbtns = document.getElementsByClassName('btn btn-primary');
@@ -75,7 +80,6 @@ import puppeteer from 'puppeteer';
           // await page.waitForNavigation({ waitUntil: 'networkidle0', timeout: 0 });
           console.log(savebtnId);
           var howacquiredId = '#' + savebtnId.replace('grgroundtruth_btnsave_', 'grgroundtruth_ddlrightsreq_');
-          // await delay(5000);
           await page.waitForSelector(howacquiredId, { timeout: 0 });
           let howacquireddl = await page.$(howacquiredId);
           let option = await page.$eval(howacquiredId, node => node.value);
@@ -104,7 +108,7 @@ import puppeteer from 'puppeteer';
             let btn1 = document.getElementById(btnId);
             btn1.click();
           }, savebtnId);
-          await delay(7000);
+          await delay(saveWaitTime);
         }
 
       }
