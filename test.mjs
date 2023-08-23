@@ -9,12 +9,13 @@ import puppeteer from 'puppeteer';
       defaultViewport: false
     });
     const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
-    const lpmInitValue = 108;
-    const lpmEndValue = 2;
+    const lpmInitValue = 408;
+    const lpmEndValue = 590;
+    const increment = 1; ///1:incrment ; -1: decrement
     const saveWaitTime = 7000;
     const lpmChangeWaitTime = 7000;
     const rowChangeWaitTime = 7000;
-    const increment = -1; ///1:incrment ; -1: decrement
+    
 
     const page = await browser.newPage();
     // Navigate the page to a URL
@@ -37,7 +38,7 @@ import puppeteer from 'puppeteer';
 
     for (let lpmVal = lpmInitValue; true; lpmVal = lpmVal + (2 * increment)) {
       if(lpmVal==lpmEndValue){
-        console("condition not met");
+        console.log("condition not met/completed");
         break;
       }
       var datetime = new Date();
