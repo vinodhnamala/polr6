@@ -3,14 +3,14 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
 (async () => {
 
   try {
-    const wsChromeEndpointurl = 'ws://127.0.0.1:9223/devtools/browser/bb473f31-6a0d-42d9-ac9b-8a8a422c5b61';
+    const wsChromeEndpointurl = 'ws://127.0.0.1:9223/devtools/browser/481bb681-dc6c-48ef-8919-27e0d42bcb8a';
     const browser = await puppeteer.connect({
       browserWSEndpoint: wsChromeEndpointurl,
       defaultViewport: false
     });
     const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
-    const lpmInitValue = 1282;
-    const lpmEndValue = 1300;
+    const lpmInitValue = 1556;
+    const lpmEndValue = 1700;
     const increment = 1; ///1:incrment ; -1: decrement
     const operationTimeout = 600000;
     const safeWaitTime = 1000;
@@ -89,7 +89,8 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
           return savebtnIds;
         });
         console.log(result);
-        for (let j = 0; j < result.length; j++) {
+        //test with rowrange*10
+        for (let j = 0; j < (rowrangeopt.length*10); j++) {
 
           let subresult = await page.evaluate(() => {
             let allbtns = document.getElementsByClassName('btn btn-primary');
@@ -109,6 +110,8 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
             console.log("......");
             break;
           }
+          //selection
+          
           var savebtnId = await subresult[0];
           console.log(savebtnId);
 
