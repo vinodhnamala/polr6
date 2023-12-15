@@ -9,8 +9,8 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
             defaultViewport: false
         });
         const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
-        const surveyInitVal = 550;
-        const surveyEndVal = 601;
+        const rowInit = 550;
+        const rowEnd = 601;
         const increment = 1; ///1:incrment ; -1: decrement
         const operationTimeout = 600000;
         const safeWaitTime = 1000;
@@ -28,7 +28,7 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
 
         })
 
-        for (var i = 0; i < 100; i++) {
+        for (var i = rowInit; i < rowEnd; i+increment) {
             let subresult = await page.evaluate(() => {
                 let allbtns = document.getElementsByClassName('btn btn-primary');
                 let savebtnIds = [];
