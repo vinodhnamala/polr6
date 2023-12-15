@@ -28,7 +28,7 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
 
         })
 
-        for (var i = rowInit; i < rowEnd; i+increment) {
+        for (var i = rowInit; i < rowEnd; i=i+increment) {
             let subresult = await page.evaluate(() => {
                 let allbtns = document.getElementsByClassName('btn btn-primary');
                 let savebtnIds = [];
