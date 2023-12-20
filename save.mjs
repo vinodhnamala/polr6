@@ -3,7 +3,7 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
 (async () => {
 
     try {
-        const wsChromeEndpointurl = 'ws://127.0.0.1:9223/devtools/browser/481bb681-dc6c-48ef-8919-27e0d42bcb8a';
+        const wsChromeEndpointurl = 'ws://127.0.0.1:9223/devtools/browser/ca1ea623-8025-4302-9a95-bf669494219f';
         const browser = await puppeteer.connect({
             browserWSEndpoint: wsChromeEndpointurl,
             defaultViewport: false
@@ -29,7 +29,7 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
         })
         await page.waitForSelector("#ddlvillage", { timeout: 0 });
         const v1 = await page.$('[name="ddlvillage"]')
-        await v1.select("1050016");
+        await v1.select("2404017");
 
         const v2 = await page.$('[name="btngetdetails"]')
         var waitPageNav0 = page.waitForNavigation({ timeout: operationTimeout });
