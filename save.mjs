@@ -122,7 +122,8 @@ import puppeteer, { HTTPResponse } from 'puppeteer';
                     let myval = await page.evaluate((selId) => {
                         let txtId = document.getElementById(selId.substring(1));
                         let prevVal = txtId.value;
-                        txtId.value = parseFloat(prevVal);
+                        let newVal=prevVal.split('.')[0]+'.'+prevVal.split('.')[1].substring(0,3);
+                        txtId.value =newVal; 
                     }, lpmExtentTextId);
 
 
